@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/oop.iml" filepath="$PROJECT_DIR$/oop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/oop.main.iml" filepath="$PROJECT_DIR$/.idea/modules/oop.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/oop.test.iml" filepath="$PROJECT_DIR$/.idea/modules/oop.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oop.iml" filepath="$PROJECT_DIR$/oop.iml" group="oop" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/oop_main.iml" filepath="$PROJECT_DIR$/.idea/modules/oop_main.iml" group="oop" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/oop_test.iml" filepath="$PROJECT_DIR$/.idea/modules/oop_test.iml" group="oop" />
     </modules>
   </component>
 </project>

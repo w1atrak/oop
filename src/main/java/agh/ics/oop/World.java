@@ -39,6 +39,9 @@ public class World{
     public static void main(String[] args){
         out.println("Start");
 
+        Vector2d tmp = new Vector2d(2,3);
+        out.println(tmp.toSstring());
+        out.println(tmp.toSstring()=="(2,3)");
 
 
         Direction[] instructions = convert(args);
