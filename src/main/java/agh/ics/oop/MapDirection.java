@@ -39,13 +39,22 @@ enum MapDirection {
     public Vector2d toUnitVector(){
         int tx=0;
         int ty=0;
-        switch (this) {
-            case NORTH: tx = 0; ty = 1;
-            case SOUTH: tx = 0; ty = -1;
-            case WEST: tx = -1; ty = 0;
-            case EAST: tx = 1; ty = 0;
-        }
 
+        if(this==MapDirection.NORTH){
+            tx = 0;
+            ty = 1;
+        }
+        else if(this==MapDirection.SOUTH){
+            tx = 0;
+            ty = -1;
+        }
+        else if(this==MapDirection.WEST){
+            tx = -1;
+            ty = 0;
+        }else if(this==MapDirection.EAST){
+            tx = 1;
+            ty = 0;
+        }
 
         Vector2d result = new Vector2d(tx,ty);
         return result;

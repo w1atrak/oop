@@ -4,8 +4,6 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class MapDirectionTest {
-    //public MapDirectionTest() {
-    //}
     @Test
     public void testNext(){
         MapDirection tmp = MapDirection.NORTH;

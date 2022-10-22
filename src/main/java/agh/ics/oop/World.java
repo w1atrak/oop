@@ -1,8 +1,11 @@
 package agh.ics.oop;
+import java.util.SplittableRandom;
+
 import static java.lang.System.out;
 
+
 public class World{
-    public static void run(Direction[] arr){
+    public static void run(MoveDirection[] arr){
 
         for (int i = 0; i < arr.length; i++) {
             String message = switch (arr[i]){
@@ -18,35 +21,44 @@ public class World{
         }
     }
 
-    public static Direction[] convert(String[] args){
-        Direction[] res = new Direction[args.length];
+    public static MoveDirection[] convert(String[] args){
+        MoveDirection[] res = new MoveDirection[args.length];
         int i = 0;
         for(String arg: args){
-            Direction direction = switch (arg){
-                case "f" -> Direction.FORWARD;
-                case "b" -> Direction.BACKWARD;
-                case "l" -> Direction.LEFT;
-                case "r" -> Direction.RIGHT;
-                default -> Direction.STILL;
+            MoveDirection Movedirection = switch (arg){
+                case "f" -> MoveDirection.FORWARD;
+                case "b" -> MoveDirection.BACKWARD;
+                case "l" -> MoveDirection.LEFT;
+                case "r" -> MoveDirection.RIGHT;
+                default -> MoveDirection.STILL;
             };
 
-            res[i] = direction;
+            res[i] = Movedirection;
             i++;
         }
         return res;
     }
 
     public static void main(String[] args){
-        out.println("Start");
 
-        Vector2d tmp = new Vector2d(2,3);
-        out.println(tmp.toSstring());
-        out.println(tmp.toSstring()=="(2,3)");
+        Animal zwierze = new Animal();
+        OptionsParser tmp = new OptionsParser();
+        MoveDirection[] directives = tmp.parse(args);
+
+        for(MoveDirection i : directives) {
+            zwierze.move(i);
+        }
+
+        out.println(zwierze.toString());
 
 
-        Direction[] instructions = convert(args);
-        run(instructions);
 
-        out.println("Stop");
+
+        // ./gradlew run --args=" "
+
+        //MoveDirection[] instructions = convert(args);
+        //run(instructions);
+
     }
 }
+
