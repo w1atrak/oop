@@ -2,7 +2,10 @@ package agh.ics.oop;
 
 public class Animal {
     private MapDirection oriented = MapDirection.NORTH;
-    private Vector2d position = new Vector2d(2,2);
+    private Vector2d position;
+
+    RectangularMap map;
+
 
     public Vector2d getPosition() {
         return this.position;
@@ -12,12 +15,14 @@ public class Animal {
         return this.oriented;
     }
 
-    public Animal(){
+    public  Animal(RectangularMap map, Vector2d initialPosition){
+        this.map = map;
+        this.position = initialPosition;
     }
 
     @Override
     public String toString(){
-        return "Oriented " + String.valueOf(oriented) + " at " + position.toSstring() ;
+        return (String.valueOf(oriented)).substring(0,1);
     }
 
     public boolean isAt(Vector2d position){
@@ -32,12 +37,11 @@ public class Animal {
         } else if (direction == MoveDirection.LEFT) {
             this.oriented = this.oriented.previous();
         } else if (direction == MoveDirection.FORWARD) {
-            this.position =  this.position.add(this.oriented.toUnitVector());
+            tmp = tmp.add(this.oriented.toUnitVector());
         } else if (direction == MoveDirection.BACKWARD) {
-            this.position = this.position.add((this.oriented.toUnitVector()).opposite());
+            tmp = tmp.add((this.oriented.toUnitVector()).opposite());
         }
-
-        if(this.position.x>4 || this.position.y>4 || this.position.x<0 || this.position.y<0){ this.position = tmp; }
+        if( this.map.canMoveTo(tmp) && !this.map.isOccupied(tmp) && !(tmp.x>map.width || tmp.y>map.height || tmp.x<0 || tmp.y<0)){ this.position = tmp; }
     }
 
 }

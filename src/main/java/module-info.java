@@ -1,6 +1,7 @@
 module agh.ics.oop {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens agh.ics.oop to javafx.fxml;
