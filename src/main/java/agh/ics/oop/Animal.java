@@ -1,12 +1,13 @@
 package agh.ics.oop;
 
-public class Animal {
+public class Animal extends MapObject{
     private MapDirection oriented = MapDirection.NORTH;
     private Vector2d position;
 
-    RectangularMap map;
+    AbstractWorldMap map;
 
 
+    @Override
     public Vector2d getPosition() {
         return this.position;
     }
@@ -15,7 +16,7 @@ public class Animal {
         return this.oriented;
     }
 
-    public  Animal(RectangularMap map, Vector2d initialPosition){
+    public  Animal(AbstractWorldMap map, Vector2d initialPosition){
         this.map = map;
         this.position = initialPosition;
     }
@@ -29,6 +30,7 @@ public class Animal {
         return this.position.equals(position);
     }
 
+
     public void move(MoveDirection direction){
         Vector2d tmp = new Vector2d(this.position.x,this.position.y);
 
@@ -41,7 +43,8 @@ public class Animal {
         } else if (direction == MoveDirection.BACKWARD) {
             tmp = tmp.add((this.oriented.toUnitVector()).opposite());
         }
-        if( this.map.canMoveTo(tmp) && !this.map.isOccupied(tmp) && !(tmp.x>map.width || tmp.y>map.height || tmp.x<0 || tmp.y<0)){ this.position = tmp; }
+        if( (this.map.canMoveTo(tmp) && !this.map.isOccupied(tmp)) || map.occupiedByGrass(tmp) ){ this.position = tmp; }
+        //&& !(tmp.x>map.width || tmp.y>map.height || tmp.x<0 || tmp.y<0)
     }
 
 }

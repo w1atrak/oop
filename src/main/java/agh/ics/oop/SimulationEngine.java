@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import agh.ics.oop.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,17 +8,17 @@ import java.awt.*;
 public class SimulationEngine extends Component implements IEngine {
 
     MoveDirection[] directions;
-    RectangularMap map;
+    GrassField map;
     Vector2d[] positions;
 
-    public SimulationEngine(MoveDirection[] directions, RectangularMap map, Vector2d[] positions){
+    public SimulationEngine(MoveDirection[] directions, GrassField map, Vector2d[] positions){
         this.directions = directions;
         this.map = map;
         this.positions = positions;
 
         for(Vector2d postition : this.positions){
-            if(this.map.canMoveTo(postition) && !this.map.isOccupied(postition)){
-                Animal animal = new Animal(this.map, postition);
+            if((this.map.canMoveTo(postition) && !this.map.isOccupied(postition)) || this.map.occupiedByGrass(postition)){
+                MapObject animal = new Animal(this.map, postition);
                 map.place(animal);
             }
         }
@@ -33,14 +34,15 @@ public class SimulationEngine extends Component implements IEngine {
         f.setVisible(true);
         f.add(t);
 
-        //f.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
 
         int size = this.map.animals.size();
+
         for (int i = 0; i < this.directions.length; i++) {
             this.map.animals.get(i%size).move(this.directions[i]);
 
             try {
-                Thread.sleep(800);
+                Thread.sleep(1000);
+
                 t.setText(map.toString() + "\n" + "Animal " + String.valueOf(1+i%size));
             }catch (InterruptedException ex) {
                 JOptionPane.showMessageDialog(this,ex);
