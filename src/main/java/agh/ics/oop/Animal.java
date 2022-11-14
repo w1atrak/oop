@@ -1,10 +1,13 @@
 package agh.ics.oop;
 
+import java.util.ArrayList;
+
 public class Animal extends MapObject{
     private MapDirection oriented = MapDirection.NORTH;
     private Vector2d position;
 
-    AbstractWorldMap map;
+    GrassField map;
+    ArrayList<IPositionChangeObserver> observers = new ArrayList<>();
 
 
     @Override
@@ -16,9 +19,27 @@ public class Animal extends MapObject{
         return this.oriented;
     }
 
-    public  Animal(AbstractWorldMap map, Vector2d initialPosition){
+    public  Animal(GrassField map, Vector2d initialPosition){
         this.map = map;
         this.position = initialPosition;
+    }
+
+    void addObserver(IPositionChangeObserver observer){
+        this.observers.add(observer);
+    }
+    void removeObserver(IPositionChangeObserver observer){
+        for (int i = 0; i < this.observers.size(); i++) {
+            if (this.observers.get(i).equals(observer)){
+                this.observers.remove(i);
+                break;
+            }
+        }
+    }
+
+    void positionChanged(Vector2d oldPos, Vector2d newPos){
+        for(IPositionChangeObserver observer : this.observers){
+            observer.positionChanged(oldPos,newPos);
+        }
     }
 
     @Override
@@ -43,8 +64,10 @@ public class Animal extends MapObject{
         } else if (direction == MoveDirection.BACKWARD) {
             tmp = tmp.add((this.oriented.toUnitVector()).opposite());
         }
-        if( (this.map.canMoveTo(tmp) && !this.map.isOccupied(tmp)) || map.occupiedByGrass(tmp) ){ this.position = tmp; }
-        //&& !(tmp.x>map.width || tmp.y>map.height || tmp.x<0 || tmp.y<0)
+        if( (this.map.canMoveTo(tmp) && !this.map.isOccupied(tmp)) || map.occupiedByGrass(tmp) ){
+            this.positionChanged(this.position,tmp);
+            this.position = tmp;
+        }
     }
 
 }

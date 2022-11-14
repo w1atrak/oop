@@ -4,6 +4,7 @@ import agh.ics.oop.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
 
 public class SimulationEngine extends Component implements IEngine {
 
@@ -37,18 +38,31 @@ public class SimulationEngine extends Component implements IEngine {
 
         int size = this.map.animals.size();
 
-        for (int i = 0; i < this.directions.length; i++) {
-            this.map.animals.get(i%size).move(this.directions[i]);
 
+        Animal[] anims = new Animal[size];
+        int j = 0;
+        for(var entry : this.map.animals.entrySet()){
+            anims[j] = entry.getValue();
+            j++;
+        }
+
+        for(int i = 0; i < directions.length; i++){
+
+
+            anims[i%size].move(this.directions[i]);
             try {
                 Thread.sleep(1000);
 
-                t.setText(map.toString() + "\n" + "Animal " + String.valueOf(1+i%size));
+                t.setText(this.map.toString() + "\n" + "Animal " + String.valueOf(1+i%size));
+
             }catch (InterruptedException ex) {
                 JOptionPane.showMessageDialog(this,ex);
             }
-
         }
+
+      //  for (int i = 0; i < this.directions.length; i++) {
+        //    this.map.animals.get(i%size).move(this.directions[i]);
+       // }
 
 
 

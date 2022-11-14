@@ -1,6 +1,9 @@
 package agh.ics.oop;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static java.lang.System.out;
 
 
@@ -46,7 +49,18 @@ public class World{
             args = input;
         }
 
+        Map<Vector2d, Animal> ani = new HashMap<>();
+        ani.put(new Vector2d(2,3),new Animal(new GrassField(3),new Vector2d(2,3)));
+        Animal[] anims = new Animal[1];
 
+
+        for(var entry : ani.entrySet()){
+            anims[0] = entry.getValue();
+        }
+
+
+
+        // TODO działa ale zwierzęta nie zmieniają pozycji przynajmniej kurwa wizualnie
 
         MoveDirection[] directions = new OptionsParser().parse(args);
         GrassField map = new GrassField(10);

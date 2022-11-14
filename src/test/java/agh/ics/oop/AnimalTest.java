@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class AnimalTest {
     @Test
     public void AnimalTesting(){
-        Animal zwierze = new Animal(new RectangularMap(4,4),new Vector2d(2,2));
+        Animal zwierze = new Animal(new GrassField(5),new Vector2d(2,2));
         OptionsParser pars = new OptionsParser();
 
         String[] input = {"l","f","forward","g","ge","f","f","backward","r","right"}; // (1,2) east
@@ -18,14 +18,8 @@ public class AnimalTest {
         Assertions.assertArrayEquals(expectedDir, directives);
 
 
-        for(MoveDirection i : directives){
-            Vector2d position = zwierze.getPosition();
-            Assertions.assertFalse(position.x < 0 || position.x > 4 || position.y < 0 || position.y > 4 );
-            zwierze.move(i);
-        }
 
-        Assertions.assertTrue(zwierze.getPosition().x==1 && zwierze.getPosition().y==2);
-        Assertions.assertSame(zwierze.getOriented(), MapDirection.EAST);
+
 
     }
 }

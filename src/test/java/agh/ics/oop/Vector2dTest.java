@@ -18,7 +18,7 @@ public class Vector2dTest {
     @Test
     public void test_toString(){
         Vector2d tmp = new Vector2d(2,3);
-        Assertions.assertTrue(tmp.toSstring().equals("(2,3)"));
+        Assertions.assertTrue(tmp.toString().equals("(2,3)"));
     }
 
     @Test

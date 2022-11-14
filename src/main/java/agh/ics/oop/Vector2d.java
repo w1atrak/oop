@@ -10,7 +10,7 @@ public class Vector2d {
         this.x = x;
         this.y = y;
     }
-    public String toSstring(){
+    public String toString(){
         return "(" + String.valueOf(this.x) + "," + String.valueOf(this.y) + ")";
     }
     public boolean precedes(Vector2d other){

@@ -20,7 +20,7 @@ public interface IWorldMap {
     /**
      * Place a animal on the map.
      *
-     * @param animal
+     *
      *            The animal to place on the map.
      * @return True if the animal was placed. The animal cannot be placed if the map is already occupied.
      */
