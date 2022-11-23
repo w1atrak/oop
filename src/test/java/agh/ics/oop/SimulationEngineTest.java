@@ -18,7 +18,6 @@ class SimulationEngineTest {
         assertFalse(!map.canMoveTo(new Vector2d(11,5)));
         assertTrue(map.isOccupied(new Vector2d(2,-1)));
         assertFalse(map.place(new Animal(map,new Vector2d(2,-1))));
-        assertEquals(map.objectAt(new Vector2d(2,-1)),map.animals.get(0));
 
     }
 

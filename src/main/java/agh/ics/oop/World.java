@@ -1,6 +1,9 @@
 package agh.ics.oop;
 
 
+import agh.ics.oop.gui.App;
+import javafx.application.Application;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,33 +46,16 @@ public class World{
     }
 
     public static void main(String[] args){
+        try {
 
-        String[] input = {"f","b","r","l","f","f","r","r","f","f","f","f","f","f","f","f",  "f", "f","f","f"}; // (2,0) S  oraz (3,5) N
-        if(args.length == 0){
-            args = input;
+            //engine.run();
+
+            Application.launch(App.class,args);
+
+        }catch (IllegalArgumentException ex){
+            out.println(ex);
         }
 
-        Map<Vector2d, Animal> ani = new HashMap<>();
-        ani.put(new Vector2d(2,3),new Animal(new GrassField(3),new Vector2d(2,3)));
-        Animal[] anims = new Animal[1];
-
-
-        for(var entry : ani.entrySet()){
-            anims[0] = entry.getValue();
-        }
-
-
-
-        // TODO działa ale zwierzęta nie zmieniają pozycji przynajmniej kurwa wizualnie
-
-        MoveDirection[] directions = new OptionsParser().parse(args);
-        GrassField map = new GrassField(10);
-
-        map.place(new Grass(new Vector2d(3,5)));
-
-        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
-        engine.run();
 
 
 

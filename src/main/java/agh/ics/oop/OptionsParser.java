@@ -7,7 +7,7 @@ public class OptionsParser {
 
 
     public MoveDirection[] parse(String[] args){
-        List<MoveDirection> res = new ArrayList<MoveDirection>();
+        List<MoveDirection> res = new ArrayList<>();
         for(String i : args){
             if(i.equals("f") || i.equals("forward")) {
                 res.add(MoveDirection.FORWARD);
@@ -18,6 +18,9 @@ public class OptionsParser {
                 res.add(MoveDirection.LEFT);
             }else if(i.equals("r") || i.equals("right")) {
                 res.add(MoveDirection.RIGHT);
+            }
+            else{
+                throw new IllegalArgumentException(i + " is not a valid argument");
             }
         }
         MoveDirection[] fres = new MoveDirection[ res.size() ];

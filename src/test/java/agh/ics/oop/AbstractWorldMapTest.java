@@ -19,8 +19,9 @@ class AbstractWorldMapTest {
     void place() {
         GrassField map = new GrassField(5);
         Animal animal = new Animal(map, new Vector2d(2,3));
-        map.place(animal);
-        assertEquals(map.animals.get(0), animal);
+        map.place(new Animal(map, new Vector2d(2,3)));
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, () -> map.place(animal));
+        Assertions.assertEquals("(2,3) isn't a valid position to place an object", exception.getMessage());
     }
 
     @Test

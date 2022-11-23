@@ -6,4 +6,5 @@ module agh.ics.oop {
 
     opens agh.ics.oop to javafx.fxml;
     exports agh.ics.oop;
+    exports agh.ics.oop.gui;
 }

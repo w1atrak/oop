@@ -4,7 +4,6 @@ import agh.ics.oop.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.lang.reflect.Array;
 
 public class SimulationEngine extends Component implements IEngine {
 
@@ -21,6 +20,9 @@ public class SimulationEngine extends Component implements IEngine {
             if((this.map.canMoveTo(postition) && !this.map.isOccupied(postition)) || this.map.occupiedByGrass(postition)){
                 MapObject animal = new Animal(this.map, postition);
                 map.place(animal);
+            }
+            else{
+                throw new IllegalArgumentException(postition.toString() + " isn't a valid position to place an object");
             }
         }
 
@@ -51,7 +53,7 @@ public class SimulationEngine extends Component implements IEngine {
 
             anims[i%size].move(this.directions[i]);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(0);
 
                 t.setText(this.map.toString() + "\n" + "Animal " + String.valueOf(1+i%size));
 

@@ -7,6 +7,7 @@ public class Animal extends MapObject{
     private Vector2d position;
 
     GrassField map;
+
     ArrayList<IPositionChangeObserver> observers = new ArrayList<>();
 
 

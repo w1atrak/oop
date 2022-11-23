@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
+
     int width;
+
     int height;
-    Map<Vector2d, MapObject> mapObjects = new HashMap<>();
     Map<Vector2d, Animal> animals = new HashMap<>();
+    Map<Vector2d, MapObject> mapObjects = new HashMap<>();
+
 
 
     public AbstractWorldMap(int width, int height){
@@ -21,6 +24,7 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
         this.animals.put(newPosition,animal);
         this.mapObjects.remove(oldPosition);
         this.mapObjects.put(newPosition,animal);
+
     }
 
     public boolean canMoveTo(Vector2d position){
@@ -31,20 +35,11 @@ abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
 
     public boolean isOccupied(Vector2d position){
         return (mapObjects.containsKey(position));  //)  //{
-        //    return true;
-        //}
-
-        //for (int i = 0; i < mapObjects.size(); i++) {
-           // if(this.mapObjects.get(i).getPosition().equals(position)){ return true; }
-
-       // for(MapObject mapObject: this.mapObjects){
-        //    if(mapObject.getPosition().equals(position)){ return true; }
-        //}
-       // return false;
     }
 
     public boolean place(MapObject mapObject){
         if(!canMoveTo(mapObject.getPosition()) || isOccupied(mapObject.getPosition())) {
+         //   throw new IllegalArgumentException(mapObject.getPosition().toString() + " isn't a valid position to place an object");
             return false;}
         this.mapObjects.put(mapObject.getPosition(),mapObject);
         return true;
